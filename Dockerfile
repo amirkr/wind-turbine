@@ -7,6 +7,8 @@ ADD ./app /wind-turbine
 COPY requirements/requirements.txt /requirements.txt
 
 WORKDIR /wind-turbine
+COPY example.env .env* ./
+COPY tests ./tests
 
 # Upgrade pip3 and install requirements
 RUN pip3 install pip -U \

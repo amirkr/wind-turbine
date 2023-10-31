@@ -10,3 +10,13 @@ services:
             - '80:8000'
         volumes:
             - ./app:/wind-turbine/app
+    mongo:
+        image: mongo:6.0-focal
+        restart: always
+        ports:
+        - 27017:27017
+        volumes:
+        - ./mongo_data:/data/db
+        env_file:
+        - ./.env
+        command: --quiet

@@ -1,2 +1,11 @@
 fastapi
 uvicorn[standard]
+motor
+environs
+pymongo
+
+# tests
+pytest
+httpx
+trio
+mongomock_motor
