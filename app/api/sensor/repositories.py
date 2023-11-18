@@ -19,3 +19,15 @@ class SensorRepository:
 
         sensor = ResponseCreateSensorModel(id=str(new_sensor.inserted_id))
         return sensor.model_dump()
+
+    @mongo_exception_handler
+    async def does_sensor_exist(self, sensor: SensorModel) -> bool:
+        does_sensor_exist = False
+        sensor_collection = await self.get_sensor_collection()
+        sensor_match_count = await sensor_collection.count_documents(
+            {"name": sensor.name},
+        )
+        if sensor_match_count > 0:
+            does_sensor_exist = True
+
+        return does_sensor_exist

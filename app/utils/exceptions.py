@@ -36,6 +36,23 @@ class DatabaseException(CustomBaseException):
             exc_info=exc_info
         )
 
+class BadRequestException(CustomBaseException):
+    def __init__(
+        self,
+        message: str ="Bad Request",
+        action: str = "",
+        status_code: int = 400,
+        exc: Exception = None,
+        exc_info: bool = True
+    ) -> None:
+        super().__init__(
+            message = message,
+            status_code=status_code,
+            action=action,
+            exc=exc,
+            exc_info=exc_info
+        )
+
 async def custom_exception_handler(request: Request, exception: CustomBaseException) -> JSONResponse:
     logger = Logger(name=exception.action)
 
